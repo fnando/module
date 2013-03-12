@@ -100,3 +100,8 @@ test("passes arguments to initializer without new keyword", function(){
   equal(args.b, 2);
   equal(args.c, 3);
 });
+
+test("namespace without callback", function(){
+  Module("A.B", "CUSTOM");
+  equal(A.B, "CUSTOM");
+});

@@ -19,6 +19,11 @@
       , last
     ;
 
+    if (typeof callback !== "function") {
+      object = callback;
+      callback = null;
+    }
+
     object = object || build();
 
     // Process all components but the last, which will store the
@@ -29,7 +34,9 @@
       scope = scope[components[i]];
     }
 
-    callback.call(scope, scope);
+    if (callback) {
+      callback.call(scope, scope);
+    }
   }
 
   // Build a new module with the correct attributes and methods.

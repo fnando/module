@@ -21,6 +21,10 @@ Define namespace with custom objects.
       config.assets = "/assets";
     }, {});
 
+Define namespace without a callback.
+
+    Module("Todo.config", {});
+
 ## Maintainer
 
 - Nando Vieira - <http://nandovieira.com.br>
