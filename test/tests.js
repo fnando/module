@@ -1,5 +1,5 @@
 module("module.js", {setup: function(){
-  delete A;
+  window.A = undefined;
 }});
 
 test("root namespace", function(){
