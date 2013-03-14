@@ -1,5 +1,12 @@
 ;(function(context){
   "use strict";
+
+  // A identifier that will be used when calling
+  // the constructor without the new keyword. When "TRANSPOSE_ARGUMENTS"
+  // is the first argument, consider the second argument as the correct
+  // argument list.
+  var TRANSPOSE_ARGUMENTS = "TRANSPOSE_ARGUMENTS";
+
   // Create a new module.
   // Define the namespace and runs the specified callback.
   // By default, the last namespace component will be defined as
@@ -41,18 +48,23 @@
 
   // Build a new module with the correct attributes and methods.
   function build() {
-    var args, constructor;
+    var constructor;
 
     constructor = function() {
+      // Hold the arguments list.
+      var args;
+
       // Make sure the constructor works with or without the
       // `new` keyword.
       if (!(this instanceof constructor)) {
-        args = arguments;
-        return new constructor();
+        return new constructor(TRANSPOSE_ARGUMENTS, arguments);
       }
 
+      // Check if arguments should be transposed.
+      args = (arguments[0] === TRANSPOSE_ARGUMENTS ? arguments[1] : arguments);
+
       // Initialize the object.
-      this.initialize.apply(this, args || arguments);
+      this.initialize.apply(this, args);
     };
 
     // Save some typing and make an alias to the prototype.

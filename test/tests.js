@@ -86,6 +86,30 @@ test("passes arguments to initializer", function(){
   equal(args.c, 3);
 });
 
+test("passes object to initializer", function(){
+  var attrs, actual, object;
+
+  attrs = {name: "John Doe", email: "john@exmaple.org"};
+
+  Module("A", function(A){
+    A.fn.initialize = function(attributes) {
+      actual = attributes;
+    };
+  });
+
+  // without new keyword
+  object = A(attrs);
+  equal(actual, attrs);
+
+  // with new keyword
+  object = new A(attrs);
+  equal(actual, attrs);
+
+  // with a totally different argument.
+  object = new A(undefined);
+  equal(actual, undefined);
+});
+
 test("passes arguments to initializer without new keyword", function(){
   var args, object;
 
