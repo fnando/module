@@ -1,12 +1,6 @@
 ;(function(context){
   "use strict";
 
-  // A identifier that will be used when calling
-  // the constructor without the new keyword. When "TRANSPOSE_ARGUMENTS"
-  // is the first argument, consider the second argument as the correct
-  // argument list.
-  var TRANSPOSE_ARGUMENTS = "TRANSPOSE_ARGUMENTS";
-
   // Create a new module.
   // Define the namespace and runs the specified callback.
   // By default, the last namespace component will be defined as
@@ -48,35 +42,33 @@
 
   // Build a new module with the correct attributes and methods.
   function build() {
-    var constructor;
+    var Constructor, Instance;
 
-    constructor = function() {
-      // Hold the arguments list.
-      var args;
+    Constructor = function() {
+      // Initialize a new instance, which won't do nothing but
+      // inheriting the prototype.
+      var instance = new Instance();
 
-      // Make sure the constructor works with or without the
-      // `new` keyword.
-      if (!(this instanceof constructor)) {
-        return new constructor(TRANSPOSE_ARGUMENTS, arguments);
-      }
+      // Apply the initializer on the given instance.
+      instance.initialize.apply(instance, arguments);
 
-      // Check if arguments should be transposed.
-      args = (arguments[0] === TRANSPOSE_ARGUMENTS ? arguments[1] : arguments);
-
-      // Initialize the object.
-      this.initialize.apply(this, args);
+      return instance;
     };
 
+    // Define the function that will be used to
+    // initialize the instance.
+    Instance = function() {};
+    Instance.prototype = Constructor.prototype;
+
     // Save some typing and make an alias to the prototype.
-    constructor.fn = constructor.prototype;
+    Constructor.fn = Constructor.prototype;
 
     // Define a noop initializer.
-    constructor.fn.initialize = function() {};
+    Constructor.fn.initialize = function() {};
 
-    return constructor;
+    return Constructor;
   }
 
   // Expose the module function.
   context.Module = Module;
 })(window);
-
