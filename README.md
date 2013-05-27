@@ -6,24 +6,30 @@ Define namespaces as constructor functions (or any object).
 
 Create a new module.
 
-    Module("Todo.Application", function(Application){
-      Application.fn.initialize = function() {
-        // execute something when initializing the object.
-      };
-    });
+```javascript
+Module("Todo.Application", function(Application){
+  Application.fn.initialize = function() {
+    // execute something when initializing the object.
+  };
+});
 
-    var app = new Todo.Application();
-        app = Todo.Application(); // the new keyword is optional.
+var app = new Todo.Application();
+    app = Todo.Application(); // the new keyword is optional.
+```
 
 Define namespace with custom objects.
 
-    Module("Todo.config", function(config){
-      config.assets = "/assets";
-    }, {});
+```javascript
+Module("Todo.config", function(config){
+  config.assets = "/assets";
+}, {});
+```
 
 Define namespace without a callback.
 
-    Module("Todo.config", {});
+```javascript
+Module("Todo.config", {});
+```
 
 ## Maintainer
 
@@ -33,10 +39,10 @@ Define namespace without a callback.
 
 Once you've made your great commits:
 
-1. [Fork](http://help.github.com/forking/) I18n.js
+1. [Fork](http://help.github.com/forking/) Module.js
 2. Create a topic branch - `git checkout -b my_branch`
 3. Push to your branch - `git push origin my_branch`
-4. [Create an Issue](http://github.com/fnando/i18n-js/issues) with a link to your branch
+4. [Create an Issue](http://github.com/fnando/module.js/issues) with a link to your branch
 5. That's it!
 
 Please respect the indentation rules and code style.
