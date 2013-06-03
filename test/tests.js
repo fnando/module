@@ -129,3 +129,10 @@ test("namespace without callback", function(){
   Module("A.B", "CUSTOM");
   equal(A.B, "CUSTOM");
 });
+
+test("returns module", function(){
+  var b;
+  var module = Module("A.B", function(B){ b = B; });
+
+  deepEqual(module, b);
+});

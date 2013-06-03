@@ -38,6 +38,8 @@
     if (callback) {
       callback.call(scope, scope);
     }
+
+    return scope;
   }
 
   // Build a new module with the correct attributes and methods.
