@@ -31,6 +31,18 @@ Define namespace without a callback.
 Module("Todo.config", {});
 ```
 
+You can fetch a namespace using `Module.fetch`, which returns the module or `null`.
+
+```javascript
+var action = Module.fetch("MyApp.SignupController.New");
+```
+
+If you want to execute a module you can use the `Module.run` function, which will execute the module (when defined) and return the instance.
+
+```javascript
+var actionInstance = Module.run("MyApp.SignupController.New");
+```
+
 ## Maintainer
 
 - Nando Vieira - <http://nandovieira.com.br>

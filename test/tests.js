@@ -136,3 +136,40 @@ test("returns module", function(){
 
   deepEqual(module, b);
 });
+
+test("fetches existing module", function(){
+  var module = Module("A.B");
+  deepEqual(module, Module.fetch("A.B"));
+});
+
+test("returns null for missing module", function(){
+  equal(Module.fetch("Invalid.Module"), null);
+});
+
+test("runs existing module", function(){
+  var called = false;
+
+  Module("A.B", function(B){
+    B.fn.initialize = function() { called = true; };
+  });
+
+  Module.run("A.B");
+
+  ok(called);
+});
+
+test("runs existing module with given arguments", function(){
+  var args;
+
+  Module("A.B", function(B){
+    B.fn.initialize = function(a, b, c) { args = [a, b, c]; };
+  });
+
+  Module.run("A.B", [1, 2, 3]);
+
+  deepEqual(args, [1, 2, 3]);
+});
+
+test("doesn't raise when running missing module", function(){
+  equal(Module.run("Invalid"), null);
+});

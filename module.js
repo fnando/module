@@ -42,6 +42,32 @@
     return scope;
   }
 
+  // Retrieve a module by its namespace. Return null if not defined.
+  Module.fetch = function(namespace) {
+    var components = namespace.split(".")
+      , scope = context
+    ;
+
+    for (var i = 0, count = components.length; i < count; i++) {
+      scope = scope[components[i]];
+
+      if (!scope) {
+        break;
+      }
+    }
+
+    return scope;
+  };
+
+  // Run the specified module and return the instance.
+  Module.run = function(namespace, args) {
+    var module = Module.fetch(namespace);
+
+    if (module) {
+      return module.apply(null, args);
+    }
+  };
+
   // Build a new module with the correct attributes and methods.
   function build() {
     var Constructor, Instance;
