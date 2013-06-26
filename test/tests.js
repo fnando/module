@@ -165,7 +165,7 @@ test("runs existing module with given arguments", function(){
     B.fn.initialize = function(a, b, c) { args = [a, b, c]; };
   });
 
-  Module.run("A.B", [1, 2, 3]);
+  Module.run("A.B", 1, 2, 3);
 
   deepEqual(args, [1, 2, 3]);
 });

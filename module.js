@@ -60,11 +60,11 @@
   };
 
   // Run the specified module and return the instance.
-  Module.run = function(namespace, args) {
+  Module.run = function(namespace) {
     var module = Module.fetch(namespace);
 
     if (module) {
-      return module.apply(null, args);
+      return module.apply(null, Array.prototype.slice.call(arguments, 1));
     }
   };
 
