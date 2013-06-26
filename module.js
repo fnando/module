@@ -60,6 +60,9 @@
   };
 
   // Run the specified module and return the instance.
+  //
+  //     Module.run("Todo.Application");
+  //     Module.run("Todo.Application", arg1, arg2);
   Module.run = function(namespace) {
     var module = Module.fetch(namespace);
 
