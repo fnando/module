@@ -97,6 +97,36 @@
     return Constructor;
   }
 
+  // Sometimes you want to define your own wrapper, with custom initialization.
+  // In this case, you can use the `Module.wrapper` function.
+  //
+  //     Module.wrapper("MyApp.Model", function(namespace, callback){
+  //       Module(namespace, function(Model){
+  //         $.extend(Model, Validations);
+  //         $.extend(Model, MassAssignment);
+  //
+  //         Model.fn.initialize = function(attributes) {
+  //           this.assignAttributes(attributes);
+  //         };
+  //       });
+  //     });
+  //
+  //     MyApp.Model("MyApp.User", function(User){
+  //       User.validates("name", {presence: true});
+  //     });
+  //
+  //     var user = MyApp.User();
+  //
+  Module.wrapper = function(namespace, initializer) {
+    return Module(namespace, function(Definition) {
+      Definition.fn.initialize = function(namespace, callback) {
+        initializer(namespace, callback);
+      };
+
+      return Definition;
+    });
+  };
+
   // Expose the module function.
   context.Module = Module;
 })(window);

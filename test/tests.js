@@ -173,3 +173,20 @@ test("runs existing module with given arguments", function(){
 test("doesn't raise when running missing module", function(){
   equal(Module.run("Invalid"), null);
 });
+
+test("define a wrapper", function(){
+  Module.wrapper("A.B", function(namespace, callback){
+    Module("A.B." + namespace, function(mod){
+      mod.fn.initialize = function(e){
+        this.d = "D";
+        this.e = e;
+      };
+    });
+  });
+
+  A.B("C");
+
+  equal(typeof A.B, "function");
+  equal(A.B.C().d, "D");
+  equal(A.B.C("E").e, "E");
+});
