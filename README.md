@@ -43,6 +43,39 @@ If you want to execute a module you can use the `Module.run` function, which wil
 var actionInstance = Module.run("MyApp.SignupController.New");
 ```
 
+You may want to provide your own wrapper, with default initialization. You can use `Module.wrapper` for this.
+
+```javascript
+Module.wrapper("Model", function(namespace, callback){
+  Module(namespace, function(Model){
+    Model.fn.initialize = function(attributes) {
+      this.assign(attributes);
+    };
+
+    Model.fn.assign = function(attributes) {
+      for (var name in attributes) {
+        this[name] = attributes[name];
+      }
+    };
+
+    callback(Model);
+  });
+});
+```
+
+Now you can just call `Model` and brand new model function will be defined.
+
+```javascript
+Model("Todo.Task", function(Task){
+  Task.fn.isPending = function() {
+    return this.status === "pending";
+  };
+});
+
+var task = Todo.Task({status: "pending"});
+console.log(task.isPending()); // true
+```
+
 ## Maintainer
 
 - Nando Vieira - <http://nandovieira.com.br>
