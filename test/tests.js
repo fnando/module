@@ -190,3 +190,15 @@ test("define a wrapper", function(){
   equal(A.B.C().d, "D");
   equal(A.B.C("E").e, "E");
 });
+
+test("define a wrapper which receives custom arguments", function(){
+  var options, callback;
+
+  Module.wrapper("A.B", function(opts, callback){
+    options = opts;
+  });
+
+  A.B({c: "C"});
+
+  deepEqual({c: "C"}, options);
+});

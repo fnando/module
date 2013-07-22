@@ -120,7 +120,7 @@
   Module.wrapper = function(namespace, initializer) {
     return Module(namespace, function(Definition) {
       Definition.fn.initialize = function(namespace, callback) {
-        initializer(namespace, callback);
+        initializer.apply(Definition, arguments);
       };
 
       return Definition;
