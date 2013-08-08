@@ -1,0 +1,10 @@
+{
+  "name": "module",
+  "version": "0.1.0",
+  "main": ["./module.js", "./module.min.js"],
+  "ignore": [
+    "test",
+    "report",
+    ".gitignore"
+  ]
+}
