@@ -28,6 +28,19 @@ test("composed namespace", function(){
   equal(options.context, A.B.C);
 });
 
+test("composed namespace with colon", function(){
+  var options = {};
+
+  Module("A::B::C", function(inner){
+    options.inner = inner;
+    options.context = this;
+  });
+
+  equal(typeof A.B.C, "function");
+  equal(options.inner, A.B.C);
+  equal(options.context, A.B.C);
+});
+
 test("custom object", function(){
   var options = {};
 

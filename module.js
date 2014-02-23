@@ -14,7 +14,7 @@
   // The module's prototype will be defined as a shortcut called `Module#fn`.
   // Any initialization must be performed on the `Module#initialize()` function.
   function Module(namespace, callback, object) {
-    var components = namespace.split(".")
+    var components = namespace.split(/[.:]+/)
       , scope = context
       , component
       , last
