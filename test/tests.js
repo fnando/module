@@ -41,6 +41,30 @@ test("composed namespace with colon", function(){
   equal(options.context, A.B.C);
 });
 
+test("pass the prototype as second argument", function(){
+  var options = {};
+
+  Module("A::B::C", function(inner, fn){
+    options.fn = fn;
+  });
+
+  equal(options.fn, A.B.C.prototype);
+});
+
+test("custom object also receives the prototype as second argument", function(){
+  var options = {};
+
+  Module("A::B::C", function(inner, fn){
+    options.fn = fn;
+  }, "CUSTOM");
+
+  equal(options.fn, A.B.C.prototype);
+
+  // Only functions have the prototype property.
+  // So, other objects must receive undefined.
+  equal(options.fn, undefined);
+});
+
 test("custom object", function(){
   var options = {};
 

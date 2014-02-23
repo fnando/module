@@ -36,7 +36,7 @@
     }
 
     if (callback) {
-      callback.call(scope, scope);
+      callback.call(scope, scope, scope.prototype);
     }
 
     return scope;
