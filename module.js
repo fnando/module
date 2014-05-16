@@ -63,7 +63,7 @@
   Module.run = function(namespace, args) {
     var module = Module.fetch(namespace);
 
-    if (module) {
+    if (typeof module === 'function') {
       return module.apply(null, args);
     }
   };

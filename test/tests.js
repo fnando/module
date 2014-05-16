@@ -211,6 +211,13 @@ test("doesn't raise when running missing module", function(){
   equal(Module.run("Invalid"), null);
 });
 
+test("doesn't raise when running missing module with childs defined", function(){
+  Module("A.B", function(B){
+  });
+
+  equal(Module.run("A"), null);
+});
+
 test("define a wrapper", function(){
   Module.wrapper("A.B", function(namespace, callback){
     Module("A.B." + namespace, function(mod){
