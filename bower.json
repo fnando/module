@@ -1,7 +1,7 @@
 {
   "name": "module",
   "version": "1.0.2",
-  "main": ["./module.js", "./module.min.js"],
+  "main": ["./module.js"],
   "ignore": [
     "test",
     "report",
