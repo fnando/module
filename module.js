@@ -89,7 +89,16 @@
     Instance.prototype = Constructor.prototype;
 
     // Save some typing and make an alias to the prototype.
-    Constructor.fn = Constructor.prototype;
+    try {
+      Object.defineProperty(Constructor, 'fn', {
+        configurable: false,
+        enumerable: false,
+        writable: false,
+        value: Constructor.prototype
+      });
+    } catch (error) {
+      Constructor.fn = Constructor.prototype;
+    }
 
     // Define a noop initializer.
     Constructor.fn.initialize = function() {};
