@@ -1,5 +1,5 @@
-;(function(context){
-  "use strict";
+;(function(context) {
+  'use strict';
 
   // Create a new module.
   // Define the namespace and runs the specified callback.
@@ -7,20 +7,18 @@
   // as function. You can create a regular object by setting the
   // third argument to anything you want.
   //
-  //     Module("Todo.Application", function(Application){
-  //       Application.fn.initialize = function(){};
+  //     Module("Todo.Application", function(Application) {
+  //       Application.fn.initialize = function() {};
   //     });
   //
   // The module's prototype will be defined as a shortcut called `Module#fn`.
   // Any initialization must be performed on the `Module#initialize()` function.
   function Module(namespace, callback, object) {
-    var components = namespace.split(/[.:]+/)
-      , scope = context
-      , component
-      , last
-    ;
+    var components = namespace.split(/[.:]+/);
+    var scope = context;
+    var component, last;
 
-    if (typeof callback !== "function") {
+    if (typeof callback !== 'function') {
       object = callback;
       callback = null;
     }
@@ -44,9 +42,8 @@
 
   // Retrieve a module by its namespace. Return null if not defined.
   Module.fetch = function(namespace) {
-    var components = namespace.split(".")
-      , scope = context
-    ;
+    var components = namespace.split('.');
+    var scope = context;
 
     for (var i = 0, count = components.length; i < count; i++) {
       scope = scope[components[i]];
@@ -109,8 +106,8 @@
   // Sometimes you want to define your own wrapper, with custom initialization.
   // In this case, you can use the `Module.wrapper` function.
   //
-  //     Module.wrapper("MyApp.Model", function(namespace, callback){
-  //       Module(namespace, function(Model){
+  //     Module.wrapper("MyApp.Model", function(namespace, callback) {
+  //       Module(namespace, function(Model) {
   //         $.extend(Model, Validations);
   //         $.extend(Model, MassAssignment);
   //
@@ -120,7 +117,7 @@
   //       });
   //     });
   //
-  //     MyApp.Model("MyApp.User", function(User){
+  //     MyApp.Model("MyApp.User", function(User) {
   //       User.validates("name", {presence: true});
   //     });
   //
