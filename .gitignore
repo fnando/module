@@ -1,2 +1,3 @@
 report
 *.log
+node_modules
