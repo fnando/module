@@ -1,6 +1,7 @@
 {
   "name": "module",
   "version": "1.0.4",
+  "description": "Define namespaces as constructor functions (or any object).",
   "main": ["./module.js"],
   "ignore": [
     "test",
